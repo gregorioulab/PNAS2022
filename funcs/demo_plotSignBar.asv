@@ -1,0 +1,17 @@
+function demo_plotSignBar(p, xAxis, RGB1, RGB2, obsDiff, offset)
+p_idx = p<=0.001;
+lims = get(gca, 'ylim');
+xAxisStep = diff(xAxis);
+xAxisStep(end+1) = xAxisStep(end);
+cons_sign = bwareafilt(p_idx,[5, numel(p_idx)]);
+% nonZeroP_idx = find(p_idx);
+nonZeroP_idx = find(cons_sign);
+for i = 1: length(nonZeroP_idx)
+    ii = nonZeroP_idx(i);
+    if obsDiff(ii) > 0
+        color = RGB1;
+    else
+        color = RGB2;
+    end
+    line([xAxis(ii)  xAxis(ii)+xAxisStep(ii)], [lims(2)*0.95+offset lims(2)*0.95+offset],'linewidth',4, 'color',color)
+end
