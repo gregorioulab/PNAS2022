@@ -1,7 +1,7 @@
 close all, clear all
 rgb = [0 0 .8; 0.8 0 0];
 % select panel to plot 'fig_5a', 'fig_5b', 'fig_5c', 'fig_5d' or 'fig_5e'
-select_panel = 'fig_5e';
+select_panel = 'fig_5d';
 switch select_panel
     case 'fig_5a'
         load('fig_5a.mat')
@@ -155,14 +155,13 @@ switch select_panel
     
         ax = gca;
         ylim([-2 14])
-        xlim([time(1), time(end)])
+        xlim([timo(1), timo(end)])
         ylims = get(gca,'ylim');
         set(ax, 'xtick', [0:300:900, 1100: 200:1400, 1500:200:1800]);
         set(ax, 'xticklabels', [0:0.3:0.9, 1.1:0.2:1.4, -0.3:0.2:0]);
         
-        array_pres = 0; cue_pres = 900;
-        plot([cue_pres cue_pres],ylims,  '--k', 'LineWidth', 0.8);
-        plot([array_pres array_pres],ylims,  '--k', 'LineWidth', 0.8);
+        plot([900 900],ylims,  '--k', 'LineWidth', 0.8);
+        plot([0 0],ylims,  '--k', 'LineWidth', 0.8);
         xlabel('Time(s)');
         ylabel('Multidimensional Velocity (Hz/sec)');
         legend([h(1),h(2)],'group 1','group 2','location','best');
@@ -184,13 +183,13 @@ switch select_panel
                     else
                         color = rgb(2,:);
                     end
-                    line([time(clusters{iClust}(1))  time(clusters{iClust}(end))], [ylims(1)+1 ylims(1)+1],'linewidth',4, 'color',color)
+                    line([timo(clusters{iClust}(1))  timo(clusters{iClust}(end))], [ylims(1)+1 ylims(1)+1],'linewidth',4, 'color',color)
                 end
             end
         end
 
-        demo_makeSignBar( dataBaseline_trl{1}', tmp1', time, 1000, [.5 .5 .5], rgb(1,:), 1, -0.6)
-        demo_makeSignBar( dataBaseline_trl{2}', tmp2', time, 1000, [.5 .5 .5], rgb(2,:), 1, -0.3)
+        demo_makeSignBar( dataBaseline_trl{1}', tmp1', timo, 1000, [.5 .5 .5], rgb(1,:), 1, -0.6)
+        demo_makeSignBar( dataBaseline_trl{2}', tmp2', timo, 1000, [.5 .5 .5], rgb(2,:), 1, -0.3)
         rectangle('Position',[1310 ylims(1) 180 ylims(2)-ylims(1)],'EdgeColor','k','FaceColor','w'), hold on,
     case 'fig_5e'
         load('fig_5e.mat')
