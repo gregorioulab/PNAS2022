@@ -9,9 +9,13 @@ end
 p       = nan(size(condB,2),1);
 obsDiff = nan(size(condB,2),1);
 
-if cmpToBaseline
-    for iTime = 1: size(condB,2)
-        [p(iTime),~,obsDiff(iTime)] = demo_permTest(nanmean(condA,2), condB(:,iTime), nPermutations, true, 'positive');
+if ~cmpToBaseline
+    for iFreq = 1: size(condB,2)
+        [p(iFreq),~,~,obsDiff(iFreq)] = demo_permTest(condA(:,iFreq), condB(:,iFreq), nPermutations,0);
+    end
+else
+    for iFreq = 1: size(condB,2)
+        [p(iFreq),~,~,obsDiff(iFreq)] = demo_permTest(nanmean(condA,2), condB(:,iFreq), nPermutations true, 'positive');
     end
 end
 
